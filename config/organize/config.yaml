@@ -1,0 +1,243 @@
+#ALIASES-EXTENSIONS
+IMG_EXT: &img
+    - png
+    - jpeg
+    - jpg
+    - tiff
+
+VECTOR_EXT: &vector
+    - svg
+    - svgz
+    - cdr
+    - ai
+
+AUDIO_EXT: &audio
+    - mp3
+    - wav
+    - ogg
+    - flac
+    - m4a
+
+VIDEO_EXT: &video
+    - mp4
+    - avi
+    - mkv
+    - mov
+    - m4p
+    - mpeg
+    - mpe
+    - m4v
+    - flv
+    - webm
+    - wmv
+
+BOOK_EXT: &ebook
+    - epub
+    - fb2
+    - pdf
+    - mobi
+
+DOWNLOADS_EXT: &dwnl
+    - crdownload
+    - part
+    - download
+
+ARCHIVES_EXT: &archives
+    - zip
+    - rar
+    - 7zip
+    - tar
+    - gz
+
+rules:
+    # Move books from Telegram folder
+    - folders:
+        - ~/Загрузки/Telegram Desktop
+        - ~/Загрузки/telegram
+      filters:
+        - Extension:
+            - *ebook
+            - html
+      actions:
+        - Move:
+            dest: ~/Документы/Mega/Книги/Книг/00_inbox/
+            overwrite: true
+
+    # Move music from Telegram folder
+    - folders:
+        - ~/Загрузки/Telegram Desktop
+        - ~/Загрузки/telegram
+      filters:
+            - Extension: *audio
+      actions:
+            - Move:
+                dest: ~/Музыка/telegram/
+                overwrite: true
+
+    # Clean telegram download folders
+    - folders:
+        - ~/Загрузки/Telegram Desktop
+        - ~/Загрузки/telegram
+      filters:
+            - LastModified:
+                days: 20
+      actions:
+            - Trash
+
+    # Move screenshots into "Screenshots" folder
+    - folders:
+        - ~/Изображения
+      filters:
+        - Filename:
+            startswith: Снимок экрана
+            case_sensitive : false
+      actions:
+        - Move: ~/Изображения/screenshots/
+
+    # Move .pkg.tar.xz into "app_inux" folder with "ARCH-" prefix
+    - folders:
+        - ~/Загрузки
+      filters:
+        - Filename:
+            contains: pkg.tar
+        - Extension:
+            - xz
+      actions:
+        - Move: ~/Загрузки/app_linux/ARCH-{path.name}
+
+    # Move *.deb into "app_inux" folder with "DEB-" prefix
+    - folders:
+        - ~/Загрузки
+      filters:
+        - Extension:
+            - deb
+      actions:
+        - Move: ~/Загрузки/app_linux/DEB-{path.name}
+
+    # Move *.AppImage into "app_inux" folder
+    - folders:
+        - ~/Загрузки
+      filters:
+        - Extension:
+            - AppImage
+      actions:
+        - Move: ~/Загрузки/app_linux/
+
+    # Move screenshots older > 20 days into the trash
+    - folders:
+        - ~/Изображения/screenshots
+      filters:
+        - Extension: *img
+        - LastModified:
+            days: 20
+      actions:
+        - Trash
+
+     # Move wallpapers startswith «wall_w» to "wallpapers/4k/"
+    - folders:
+        - '~/Загрузки'
+      filters:
+        - Extension: *img
+        - Filename:
+            startswith: wall_w
+            case_sensitive : false
+      actions:
+        - Move: '~/Изображения/wallpapers/4k/'
+
+    # Move wallpapers startswith «wall_» to "wallpapers/"
+    - folders:
+        - ~/Загрузки
+      filters:
+        - Extension: *img
+        - Filename:
+            startswith: wall_
+            case_sensitive : false
+      actions:
+        - Move: ~/Изображения/wallpapers/
+
+    # Move incomplete downloads older > 30 days into the trash
+    - folders:
+        - ~/Загрузки
+      filters:
+        - Extension: *dwnl
+        - LastModified:
+            days: 30
+      actions:
+        - Trash
+
+    # Move *.exe files to "app_win"
+    - folders:
+        - ~/Загрузки
+      filters:
+        - Extension: exe
+      actions:
+        - Move:
+            dest: ~/Загрузки/app_win/
+            overwrite: true
+
+    # Move *.dmg files to "app_osx"
+    - folders:
+        - ~/Загрузки
+      filters:
+        - Extension: dmg
+      actions:
+        - Move:
+            dest: ~/Загрузки/app_osx/
+            overwrite: true
+
+
+    # Move vector files to ~/Загрузки/assets_vector
+    - folders:
+        - ~/Загрузки
+      filters:
+        - Extension: *vector
+      actions:
+        - Move:
+            dest: ~/Загрузки/assets_vector/
+            overwrite: true
+
+    # Move *.torrent files to torrent folder
+    - folders:
+        - ~/Загрузки
+      filters:
+        - Extension: torrent
+      actions:
+        - Move: ~/Загрузки/torrents/
+
+    # Move *.iso img to img_iso folder
+    - folders:
+        - ~/Загрузки
+      filters:
+        - Extension: iso
+      actions:
+        - Move: ~/Загрузки/img_iso/
+
+    # Move files from desktop older > 7 days into the 00_inbox folder
+    - folders:
+        - ~/Рабочий стол
+      filters:
+        - LastModified:
+            days: 7
+      actions:
+        - Move: ~/Документы/00_inbox/00_desktop-archive/{lastmodified.year}-{lastmodified.month}-{lastmodified.day}/
+
+    # Remove files from backup-folder > 45 days
+    - folders:
+        - /media/backup-settings/home
+      filters:
+        - LastModified:
+            days: 45
+      actions:
+        - Shell: sudo rm -rf {path}
+
+ # Move files for sketch, figma and photoshop to "fig_ps_sketch"
+    - folders:
+        - ~/Загрузки
+      filters:
+        - Extension: *archives
+        - Filename:
+            startswith: fps_
+            case_sensitive : false
+      actions:
+        - Move: ~/Загрузки/fig_ps_sketch/
+

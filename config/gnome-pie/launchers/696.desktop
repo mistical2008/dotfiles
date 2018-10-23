@@ -1,0 +1,8 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=Основное меню
+Exec=/usr/bin/gnome-pie -o 696
+Encoding=UTF-8
+Type=Application
+Icon=start-here
+StartupWMClass=gnome-pie-696
