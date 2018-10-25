@@ -49,5 +49,4 @@ alias topCom='history | awk "{print }" | sort | uniq -c | sort -rn | head'
 alias 3did='lspci | grep NVIDIA | cut -b -8'
 alias rmbadtr='find /var/cache/pacman/pkg/ -iname *.part -exec rm {} \;'
 alias pacsize="pacman -Qi | awk '/^Name/{name=$3} /^Installed Size/{print $4$5, name}' | sort -h"
-alias setwac='sudo nano /home/evgeniy/.config/xsetwacom-gnome-symbiotic/setup.sh'
 alias setwac-run='~/.config/xsetwacom-gnome-symbiotic/setup.sh'
