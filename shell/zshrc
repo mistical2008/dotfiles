@@ -169,6 +169,8 @@ conf() {
 		bmblb) sudoedit /etc/bumblebee/bumblebee.conf  ;;
 		homepage)	olddir=$(pwd) && cd ~/scripts/homepage.py && nano homepage.py && ./homepage.py; cd $olddir ;;
 		pacman)		sudoedit /etc/pacman.conf ;;
+		samba)	sudoedit /etc/samba/smb.conf ;;
+		fstab)	sudoedit /etc/fstab ;;
 		tmux)		nano ~/.tmux.conf ;;
 		nano)		nano ~/.nanorc ;;
 		xinit)		nano ~/.xinitrc ;;
