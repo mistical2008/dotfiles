@@ -95,9 +95,9 @@ export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
+#   export EDITOR='nano'
 # else
-#   export EDITOR='mvim'
+#   export EDITOR='mnano'
 # fi
 
 # Compilation flags
@@ -158,3 +158,26 @@ fi
 
 # Point out to z.sh
 . /media/Scripts/z.sh
+
+
+## FUNCTIONS
+conf() {
+	case $1 in
+		xmonad)		nano ~/.xmonad/xmonad.hs ;;
+		homepage)	olddir=$(pwd) && cd ~/scripts/homepage.py && nano homepage.py && ./homepage.py; cd $olddir ;;
+		pacman)		sudoedit /etc/pacman.conf ;;
+		tmux)		nano ~/.tmux.conf ;;
+		nano)		nano ~/.nanorc ;;
+		xinit)		nano ~/.xinitrc ;;
+		xresources)	nano ~/.Xresources && xrdb ~/.Xresources ;;
+		theme2)		nano ~/.themes/FlatStudioCustom/gtk-2.0/gtkrc ;;
+		theme3)		nano ~/.themes/FlatStudioCustom/gtk-3.0/gtk.css ;;
+		gtk2)		nano ~/.gtkrc-2.0 ;;
+		gtk3)		nano ~/.config/gtk-3.0/settings.ini ;;
+		zsh)		nano ~/.zshrc && source ~/.zshrc ;;
+		hosts)		sudoedit /etc/hosts ;;
+		vhosts)		sudoedit /etc/httpd/conf/extra/httpd-vhosts.conf ;;
+		httpd)		sudoedit /etc/httpd/conf/httpd.conf ;;
+		*)			echo "Unknown application: $1" ;;
+	esac
+}
