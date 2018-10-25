@@ -163,7 +163,7 @@ fi
 ## FUNCTIONS
 conf() {
 	case $1 in
-		wacom) sudoedit /home/evgeniy/.config/xsetwacom-gnome-symbiotic/setup.sh  ;;
+		wacom) sudo nano /home/evgeniy/.config/xsetwacom-gnome-symbiotic/setup.sh  ;;
 		homepage)	olddir=$(pwd) && cd ~/scripts/homepage.py && nano homepage.py && ./homepage.py; cd $olddir ;;
 		pacman)		sudoedit /etc/pacman.conf ;;
 		tmux)		nano ~/.tmux.conf ;;
