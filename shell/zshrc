@@ -147,7 +147,7 @@ export OCIO=/home/evgeniy/.config/blender/2.79/datafiles/colormanagement/config.
 export W_PREFIXES=$HOME/.PlayOnLinux/wineprefix
 
 # Variables
-#export SUDO_EDITOR=gedit
+export SUDO_EDITOR=gedit
 #export VISUAL=code
 #export TERMINAL=/usr/bin/gnome-terminal
 
@@ -161,9 +161,12 @@ fi
 
 
 ## FUNCTIONS
+
+# Configurations
 conf() {
 	case $1 in
 		wacom) sudo nano /home/evgeniy/.config/xsetwacom-gnome-symbiotic/setup.sh  ;;
+		bmblb) sudoedit /etc/bumblebee/bumblebee.conf  ;;
 		homepage)	olddir=$(pwd) && cd ~/scripts/homepage.py && nano homepage.py && ./homepage.py; cd $olddir ;;
 		pacman)		sudoedit /etc/pacman.conf ;;
 		tmux)		nano ~/.tmux.conf ;;
@@ -181,3 +184,6 @@ conf() {
 		*)			echo "Unknown application: $1" ;;
 	esac
 }
+
+# Other functions
+function open() { xdg-open $1 &> /dev/null &disown; }
