@@ -150,6 +150,7 @@ export W_PREFIXES=$HOME/.PlayOnLinux/wineprefix
 export SUDO_EDITOR=gedit
 #export VISUAL=code
 #export TERMINAL=/usr/bin/gnome-terminal
+export GTK_IM_MODULE="xim"
 
 # Aliases from bash
 if [ -f ~/.bash_aliases ]; then
@@ -175,6 +176,7 @@ conf() {
 		nano)		nano ~/.nanorc ;;
 		xinit)		nano ~/.xinitrc ;;
 		xresources)	nano ~/.Xresources && xrdb ~/.Xresources ;;
+		fonts-u) gedit ~/.config/fontconfig/70-emojione-color.conf && fc-cache -f -v ;;
 		theme2)		nano ~/.themes/FlatStudioCustom/gtk-2.0/gtkrc ;;
 		theme3)		nano ~/.themes/FlatStudioCustom/gtk-3.0/gtk.css ;;
 		gtk2)		nano ~/.gtkrc-2.0 ;;
